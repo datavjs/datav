@@ -1,0 +1,25 @@
+{
+  "author": "datav-group",
+  "name": "datav",
+  "description": "datav.js",
+  "version": "0.0.1-dev",
+  "homepage": "https://github.com/datavjs/datav",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/datavjs/datav.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r jscoverage test"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jscoverage": "*",
+    "mocha": "*",
+    "expect.js": "*"
+  },
+  "optionalDependencies": {}
+}
