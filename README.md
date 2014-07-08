@@ -2,6 +2,7 @@ DataV.js
 
 ## Architecture
 
+```
 /bin
 /src  |
       | - core
@@ -10,6 +11,7 @@ DataV.js
 
 /demo |
 /test |
+```
 
 从数据到图的几个步骤，待补充大图。。。
 
