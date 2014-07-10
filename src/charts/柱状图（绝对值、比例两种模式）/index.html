@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://bl.ocks.org/mbostock/raw/2368837/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>column</title>
+<style> </style>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/bar_two_type.css">
+</head>
+<body>
+<button id="value">绝对值</button>
+<button id="ratio">百分比</button>
+<div id="column"></div>
+
+<script src="js/jquery-1.7.1.js"></script>
+<script src="js/bar_two_type.js"></script>
+<script src="js/d3.v3.min.js"></script>
+
+<script>
+var b = new BarTwoType({
+  container: $('#column')[0],
+  w: 800,
+  h: 400,
+  data: [//id需要确保不同，但不需要有实际意义。
+    {"id": 1, "name":"尼尔森", "value":0.08167, "color": 'red'},
+    {"id": 2, "name":"阿里巴巴", "value":0.01492, "color": 'green'},
+    {"id": 3, "name":"C", "value":0.02782, "color": 'blue'},
+    {"id": 4, "name":"D", "value":0.04253, "color": 'yellow'}
+  ],
+  type: 'ratio' // 'value' or 'ratio' 绝对值或百分比
+});
+
+$('#value').click(function () {
+  b.setSource([//id需要确保不同，但不需要有实际意义。
+    {"id": 1, "name":"尼尔森", "value":8167.232323, "color": 'red'},
+    {"id": 2, "name":"阿里巴巴", "value":1492, "color": 'green'},
+    {"id": 3, "name":"C", "value":2782, "color": 'blue'}
+  ]);
+  b.setOptions({type: 'value'});
+  b.render();
+});
+
+$('#ratio').click(function () {
+  b.setSource([//id需要确保不同，但不需要有实际意义。
+    {"id": 1, "name":"尼尔森", "value":0.08167, "color": 'red'},
+    {"id": 2, "name":"阿里巴巴", "value":0.01492, "color": 'green'},
+    {"id": 3, "name":"C", "value":0.02782, "color": 'blue'},
+    {"id": 4, "name":"D", "value":0.04253, "color": 'yellow'}
+  ]);
+  b.setOptions({type: 'ratio'});
+  b.render();
+});
+
+</script>
+</body></html>
+

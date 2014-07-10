@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://bl.ocks.org/mbostock/raw/2368837/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>column</title>
+<style> </style>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/nilson_bubble.css">
+</head>
+<body>
+<button id="positive">正数</button>
+<button id="negative">负数</button>
+<div id="column"></div>
+
+<script src="js/jquery-1.7.1.js"></script>
+<script src="js/nilson_bubble.js"></script>
+<script src="js/d3.v3.min.js"></script>
+
+<script>
+var data = [
+  { name: 'group1',
+    children: [
+      {"name":"尼尔森零研", "x":0.25, "y": 0.35},
+      {"name":"尼尔森电商", "x":0.15, "y": 0.25},
+      {"name":"淘宝天猫", "x":0.35, "y": 0.15}
+    ]
+  },
+  { name: 'group2',
+    children: [
+      {"name":"尼尔森零研", "x":0.2, "y": 0.3},
+      {"name":"尼尔森电商", "x":0.1, "y": 0.2},
+      {"name":"淘宝天猫", "x":0.3, "y": -0.1}
+    ]
+  }
+];
+var b = new NilsonBubble({
+  container: $('#column')[0],
+  width: 500,
+  height: 400,
+  data: data,
+  color: ['#00a1f0', 'gray', 'red'],
+  type: 'ratio' // 'value' or 'ratio' 绝对值或百分比
+});
+
+$('#positive').click(function () {
+  b.setSource(data);
+  //b.setOptions({type: 'value'});
+  b.render();
+});
+
+$('#negative').click(function () {
+  b.setSource(data);
+  //b.setOptions({type: 'ratio'});
+  b.render();
+});
+
+</script>
+</body></html>
+

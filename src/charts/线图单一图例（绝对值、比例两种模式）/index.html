@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://bl.ocks.org/mbostock/raw/2368837/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>column</title>
+<style> </style>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/line_with_single_legend.css">
+</head>
+<body>
+
+<div id="legend"></div>
+<div id="column" style="float: left;"></div>
+<div id="column2" style="float: left;"></div>
+
+<script src="js/jquery-1.7.1.js"></script>
+<script src="js/line_with_single_legend.js"></script>
+<script src="js/d3.v3.min.js"></script>
+
+<script>
+var data = [
+  { name: '尼尔森零研',
+    //data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 1234000000],
+    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 123400]
+  },
+  { name: '尼尔森电商',
+    data: [10, 9, 8, 7, 6, 5, 4, 3, 2, -5]
+  },
+  { name: '淘宝天猫',
+    data: [20, 18, 2, 3, 7, 19, 29, 30, 10, 8]
+  }
+];
+
+var getColor = d3.scale.category10(); //设计稿中取色函数必须公用。
+
+var legend = new LineWithSingleLegend.legend({
+  container: $('#legend')[0],
+  width: 800,
+  height: 200,
+  getColor: getColor,
+  data: data.slice(),
+  color: ['#00a1f0', 'green', 'red'],
+});
+legend.render();
+
+var b = new LineWithSingleLegend({
+  container: $('#column')[0],
+  width: 400,
+  height: 300,
+  data: data.slice(),
+  getColor: getColor,
+  xTickTitles: ['OCT11', 'NOV11', 'DEC11', 'JAN12', 'FEB12', 'MAR12', 'APRIL12', 'MAY12', 'JUN12', 'JULY12'],
+  type: 'value' // 'value' or 'ratio' 绝对值或百分比
+});
+b.render();
+
+var b2 = new LineWithSingleLegend({
+  container: $('#column2')[0],
+  width: 400,
+  height: 300,
+  data: data.slice(),
+  getColor: getColor,
+  xTickTitles: ['OCT11', 'NOV11', 'DEC11', 'JAN12', 'FEB12', 'MAR12', 'APRIL12', 'MAY12', 'JUN12', 'JULY12'],
+  type: 'value' // 'value' or 'ratio' 绝对值或百分比
+});
+b2.render();
+
+//绑定 图例和线图
+legend.addLine(b);
+legend.addLine(b2);
+
+</script>
+</body></html>
+

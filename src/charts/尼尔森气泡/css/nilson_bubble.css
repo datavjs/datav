@@ -1,0 +1,18 @@
+.bar {
+  opacity: 0.9;
+  stroke-width: 2px;
+}
+.bar:hover {
+  opacity: 0.8;
+}
+.axis {
+  font: 10px sans-serif;
+}
+.axis path {
+  display: none;
+}
+.axis line {
+  fill: none;
+  stroke: #bbb;
+  shape-rendering: crispEdges;
+}

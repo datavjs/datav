@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://bl.ocks.org/mbostock/raw/2368837/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>column</title>
+<style> </style>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/stack_ratio.css">
+</head>
+<body>
+<div id="column"></div>
+
+<script src="js/jquery-1.7.1.js"></script>
+<script src="js/stack_ratio.js"></script>
+<script src="js/d3.v3.min.js"></script>
+
+<script>
+var data = [
+  { name: '尼尔森零研',
+    total: 13000,
+    children: [
+      {"name":"海飞丝", "value":8167},
+      {"name":"沙宣", "value":1492},
+      {"name":"爱茉莉", "value":2782},
+      {"name":"爱茉莉2", "value":278}
+    ]
+  },
+  { name: '尼尔森电商',
+    total: 1600,
+    children: [
+      {"name":"海飞丝", "value":167},
+      {"name":"沙宣", "value":492},
+      {"name":"爱茉莉", "value":782},
+      {"name":"爱茉莉2", "value":27}
+    ]
+  },
+  { name: '淘宝天猫',
+    total: 13000,
+    children: [
+      {"name":"海飞丝", "value":7167},
+      {"name":"沙宣", "value":1492},
+      {"name":"爱茉莉", "value":2782},
+      {"name":"爱茉莉2", "value":278}
+    ]
+  }
+];
+//var data = [{"name":"ndata","total":9367133.4,"children":[{"name":"潘婷","value":891651.3999999999}]},{"name":"nodata","total":936215.3,"children":[{"name":"潘婷","value":50670.700000000004}]},{"name":"alidata","total":623791518.71,"children":[{"name":"潘婷","value":15740822.26}]}];
+var b = new StackRatio({
+  container: $('#column')[0],
+  width: 500,
+  height: 400,
+  data: data,
+  color: ['#76d7f8', '#6dacef', '#6384e5', '#5c5bdb', '#8463e5', '#ac6def', '#d677f5', '#f777d6',
+          '#ef6cae', '#e46583', '#e58464', '#eead6d', '#f8d778', '#d7f677', '#adee6c', '#84e564',
+          '#5bdc5b', '#63e583', '#6deead', '#76f5d7']
+  //color: ['#00a1f0', 'gray', 'red']
+});
+b.render();
+
+
+</script>
+</body></html>
+
+
+
+

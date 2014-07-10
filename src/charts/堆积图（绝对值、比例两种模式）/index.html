@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://bl.ocks.org/mbostock/raw/2368837/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>column</title>
+<style> </style>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/stack_two_type.css">
+</head>
+<body>
+<button id="value">绝对值</button>
+<button id="ratio">百分比</button>
+<div id="column"></div>
+
+<script src="js/jquery-1.7.1.js"></script>
+<script src="js/stack_two_type.js"></script>
+<script src="js/d3.v3.min.js"></script>
+
+<script>
+var data = [
+  { name: '海飞丝',
+    children: [
+      {"name":"尼尔森零研", "value":8167},
+      {"name":"尼尔森电商", "value":1492},
+      {"name":"淘宝天猫", "value":2782}
+    ]
+  },
+  { name: '沙宣',
+    children: [
+      {"name":"尼尔森零研", "value":167},
+      {"name":"尼尔森电商", "value":492},
+      {"name":"淘宝天猫", "value":782}
+    ]
+  },
+  { name: '爱茉莉',
+    children: [
+      {"name":"尼尔森零研", "value":7167},
+      {"name":"尼尔森电商", "value":1492},
+      {"name":"淘宝天猫", "value":2782}
+    ]
+  }
+];
+for (var i = 0; i < 7; i++) {
+  data.push(
+  { name: '爱茉莉',
+    children: [
+      {"name":"尼尔森零研", "value":7167},
+      {"name":"尼尔森电商", "value":1492},
+      {"name":"淘宝天猫", "value":2782}
+    ]
+  });
+}
+var b = new StackTwoType({
+  container: $('#column')[0],
+  width: 800,
+  height: 400,
+  data: data,
+  color: ['rgb(176, 236, 122)', 'rgb(125, 216, 245)', 'rgb(246, 214, 129)'],
+  type: 'ratio' // 'value' or 'ratio' 绝对值或百分比
+});
+b.render();
+
+$('#value').click(function () {
+  b.setSource(data);
+  b.setOptions({type: 'value'});
+  b.render();
+});
+
+$('#ratio').click(function () {
+  b.setSource(data);
+  b.setOptions({type: 'ratio'});
+  b.render();
+});
+
+</script>
+</body></html>
+

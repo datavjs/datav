@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://bl.ocks.org/mbostock/raw/2368837/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>column</title>
+<style> </style>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/nielsen_bubble.css">
+</head>
+<body>
+<button id="positive">正数</button>
+<button id="negative">负数</button>
+
+<div id="legend"></div>
+<div id="column" style="float: left;"></div>
+<div id="column2" style="float: left;"></div>
+
+<script src="js/jquery-1.7.1.js"></script>
+<script src="js/nielsen_bubble.js"></script>
+<script src="js/d3.v3.min.js"></script>
+
+<script>
+var data = [
+  {"name":"海飞丝", "x":0.25, "y": 0.35, "value": 30},
+  {"name":"沙宣", "x":0.15, "y": 0.25, "value": 40},
+  {"name":"爱茉莉", "x":0.35, "y": 0.15, "value": 50},
+  {"name":"青阳", "x":0.1, "y": 0.05, "value": 60},
+  {"name":"施华蔻", "x":0.11, "y": 0.05, "value": 1},
+  {"name":"潘婷", "x":0.12, "y": -1.05, "value": 80}
+];
+var data2 = [
+  {"name":"海飞丝", "x":0.25, "y": 0.35, "value": 30},
+  {"name":"沙宣", "x":0.15, "y": 0.25, "value": 40},
+  {"name":"爱茉莉", "x":0.35, "y": 0.15, "value": 50},
+  {"name":"青阳", "x":0.1, "y": 0.05, "value": 60},
+  {"name":"施华蔻", "x":0.11, "y": 0.05, "value": 70},
+  {"name":"潘婷", "x":0.12, "y": 1.05, "value": 80}
+]
+var dataValue = [ //绝对值示例数据
+  {"name":"海飞丝", "x":25, "y": 0.35, "value": 30},
+  {"name":"沙宣", "x":300, "y": 0.25, "value": 40},
+  {"name":"爱茉莉", "x":400, "y": 0.15, "value": 50},
+  {"name":"青阳", "x":75, "y": 0.05, "value": 60},
+  {"name":"施华蔻", "x":2000, "y": 0.05, "value": 70},
+  {"name":"潘婷", "x":500, "y": -1.05, "value": 80}
+];
+var getColor = d3.scale.category10(); //设计稿中取色函数必须公用。
+
+// 图例组件， 第一步就要创建这个图例组件，从而为公用的取色函数赋值。
+var l = new NielsenBubble.legend({
+  container: $('#legend')[0],
+  getColor: getColor,
+  data: [
+    {"name":"海飞丝"},
+    {"name":"沙宣"},
+    {"name":"爱茉莉"},
+    {"name":"清扬"},
+    {"name":"施华蔻"},
+    {"name":"潘婷"}
+  ]
+});
+l.render();
+
+var b = new NielsenBubble({
+  container: $('#column')[0],
+  width: 500,
+  height: 400,
+  data: data,
+  //color: ['#00a1f0', 'gray', 'red'],
+  getColor: getColor,
+  xTitle: '销售额份额',
+  yTitle: '销售份额增长率',
+  xType: 'ratio' // 'value' or 'ratio' x轴绝对值或百分比
+});
+b.render();
+
+$('#positive').click(function () {
+  b.setSource(data2);
+  b.render();
+});
+
+$('#negative').click(function () {
+  b.setSource(data);
+  b.render();
+});
+
+
+var b2 = new NielsenBubble({
+  container: $('#column2')[0],
+  width: 500,
+  height: 400,
+  data: dataValue,
+  //color: ['#00a1f0', 'gray', 'red'],
+  getColor: getColor,
+  xTitle: '销售额绝对值',
+  yTitle: '销售份额增长率',
+  xType: 'value' // 'value' or 'ratio' x轴绝对值或百分比
+});
+b2.render();
+
+</script>
+</body></html>
+
