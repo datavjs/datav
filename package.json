@@ -19,7 +19,9 @@
   "devDependencies": {
     "jscoverage": "*",
     "mocha": "*",
-    "expect.js": "*"
+    "expect.js": "*",
+    "node-cube": "*",
+    "jsdom": "*"
   },
   "optionalDependencies": {}
 }
