@@ -26,7 +26,10 @@ make install
 cube start demo // then visit the webpage list in the cmdline
 ```
 
+cube从demo目录启动，对应每个chart自己的demo，在demo目录下建立case
+引用方法参考 demos/main.js
 
+test/unit 存放chart的测试case
 
 ## Coding Style
 
