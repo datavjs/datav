@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>amap1</title>
+    <script src="./js/jquery-2.0.3.min.js"></script> 
+    <script src="./js/bootstrap.min.js"></script>
+
+    <script src="http://webapi.amap.com/maps?v=1.3&key=yourkey" type="text/javascript"></script>
+    <script src="./js/tile.js"></script>
+    
+    <style>
+    @import url("./css/bootstrap.css");
+    body,#mapA,#UI{
+        position: absolute;
+        padding: 0px 0px;
+        top: 0%;
+        left: 0%;
+        height: 100%;
+        width: 100%;
+    }
+    #UI{
+        pointer-events:none;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="mapA"></div>
+    <div id="UI"></div>
+    <script>
+    //底图的dom必须有id
+    var node = $('#mapA');
+    var tileLayer = new Tile(node);
+
+    var button = 
+    $('<button type="button" class="btn btn-primary">换主题</button>')
+    .css({'top':'20%','left':'10%','zIndex':10000,'pointerEvents':'auto'})
+    .click(function (e) {
+        tileLayer.nextTileStyle();       
+    });
+    $('#UI').append(button);
+ 
+
+    </script>
+</body>
+
+</html>
