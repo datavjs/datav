@@ -3,15 +3,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>amap1</title>
-    <script src="./js/jquery-2.0.3.min.js"></script> 
+    <script src="./js/jquery-2.0.3.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
 
-    <script src="http://webapi.amap.com/maps?v=1.3&key=yourkey" type="text/javascript"></script>
+    <script src="http://webapi.amap.com/maps?v=1.3&key=f2f823b21908388da59aff6a9eb41ea0" type="text/javascript"></script>
     <script src="./js/tile.js"></script>
-    
+
     <style>
     @import url("./css/bootstrap.css");
-    body,#mapA,#UI{
+    body,
+    #mapA,
+    #UI {
         position: absolute;
         padding: 0px 0px;
         top: 0%;
@@ -19,29 +21,51 @@
         height: 100%;
         width: 100%;
     }
-    #UI{
-        pointer-events:none;
+    #UI {
+        pointer-events: none;
+    }
+    #change-map-button {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        z-index: 1000;
+        pointer-events: auto;
     }
     </style>
 </head>
 
 <body>
     <div id="mapA"></div>
-    <div id="UI"></div>
+    <div id="UI">
+        <div id="change-map-button" class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                换底图
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+            </ul>
+        </div>
+    </div>
+
     <script>
-    //底图的dom必须有id
+
+    //底图的div必须有id
+    //tileLayer.addTile(tileName);更换tiles的风格
+    //tileLayer.tileStyle(tileName);叠加tiles
+    //tileLayer.nextTileStyle(tileName);换下一个图层
     var node = $('#mapA');
     var tileLayer = new Tile(node);
 
-    var button = 
-    $('<button type="button" class="btn btn-primary">换主题</button>')
-    .css({'top':'20%','left':'10%','zIndex':10000,'pointerEvents':'auto'})
-    .click(function (e) {
-        tileLayer.nextTileStyle();       
-    });
-    $('#UI').append(button);
- 
-
+    //控制按钮
+    tileLayer.tileStylesList.forEach(function(name) {
+        $('#change-map-button').find('.dropdown-menu')
+            .append(
+                $('<li><a href="#">' + name + '</a></li>')
+                .click(function(e) {
+                    tileLayer.tileStyle(name);
+                })
+        )
+    })
     </script>
 </body>
 
