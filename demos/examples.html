@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>examples</title>
+<style>
+.head-title {
+  font-size: 20px;
+}
+#main {
+  width: 800px;
+  margin: 5px;
+}
+.example {
+  float: left;
+  width: 200px;
+  height: 170px;
+  border: 1px solid gray;
+  margin: 5px;
+}
+.example img{
+  max-width: 100%;
+  max-height: 80%;
+}
+.type h2 {
+  font-size: 20px;
+  margin: 10px 0;
+  border-bottom: 1px solid gray;
+}
+</style>
+<link rel="stylesheet" href="css/reset.css">
+<script src="http://libs.useso.com/js/jquery/1.7.1/jquery.min.js"></script>
+<script>
+var relativePath = '../src/charts/'
+var config = {
+  'Area': [{
+      'name': 'areaChart',
+      'description': 'Area Chart',
+      'path': 'area/areaChart/index.html',
+      'image': 'area/areaChart/thumbnail.png'
+    }, {
+      'name': 'bivariateAreaChart',
+      'description': 'Bivariate Area Chart',
+      'path': 'area/bivariateAreaChart/index.html',
+      'image': 'area/bivariateAreaChart/thumbnail.png'
+    }, {
+      'name': 'stackedAreaChart',
+      'description': 'Stacked Area Chart',
+      'path': 'area/stackedAreaChart/index.html',
+      'image': 'area/stackedAreaChart/thumbnail.png'
+    }],
+  'Line': [{
+      'name': 'lineChart',
+      'description': 'Line Chart',
+      'path': 'line/lineChart/index.html',
+      'image': 'line/lineChart/thumbnail.png'
+    }, {
+      'name': 'nielsenLineChart',
+      'description': 'Nielsen Line Chart',
+      'path': '线图（绝对值、比例两种模式）/index.html',
+      'image': '线图（绝对值、比例两种模式）/thumbnail.png'
+    }, {
+      'name': '线图单一图例（绝对值、比例两种模式）',
+      'description': '线图单一图例（绝对值、比例两种模式）',
+      'path': '线图单一图例（绝对值、比例两种模式）/index.html',
+      'image': '线图单一图例（绝对值、比例两种模式）/thumbnail.png'
+    }, {
+      'name': 'multiLineChart',
+      'description': 'Multi Line Chart',
+      'path': 'line/multiLineChart/index.html',
+      'image': 'line/multiLineChart/thumbnail.png'
+    }],
+  'Bar': [{
+      'name': 'barChart',
+      'description': 'Bar Chart',
+      'path': 'bar/barChart/index.html',
+      'image': 'bar/barChart/thumbnail.png'
+    }, {
+      'name': 'stackedBarChart',
+      'description': 'Stacked Bar Chart',
+      'path': 'bar/stackedBarChart/index.html',
+      'image': 'bar/stackedBarChart/thumbnail.png'
+    }, {
+      'name': 'normalizedStackedBarChart',
+      'description': 'Normalized Stacked Bar Chart',
+      'path': 'bar/normalizedStackedBarChart/index.html',
+      'image': 'bar/normalizedStackedBarChart/thumbnail.png'
+    }, {
+      'name': 'groupedBarChart',
+      'description': 'Grouped Bar Chart',
+      'path': 'bar/groupedBarChart/index.html',
+      'image': 'bar/groupedBarChart/thumbnail.png'
+    }, {
+      'name': 'negativeValueBarChart',
+      'description': 'Bar Chart with Negative Values',
+      'path': 'bar/negativeValueBarChart/index.html',
+      'image': 'bar/negativeValueBarChart/thumbnail.png'
+    }, {
+      'name': '堆积图（绝对值、比例两种模式）',
+      'description': '堆积图（绝对值、比例两种模式）',
+      'path': '堆积图（绝对值、比例两种模式）/index.html',
+      'image': '堆积图（绝对值、比例两种模式）/thumbnail.png'
+    }, {
+      'name': '堆积图 (渠道的品牌分布)',
+      'description': '堆积图 (渠道的品牌分布)',
+      'path': '堆积图 (渠道的品牌分布)/index.html',
+      'image': '堆积图 (渠道的品牌分布)/thumbnail.png'
+    }],
+  'Scatter': [{
+      'name': 'scatterplot',
+      'description': 'Scatter plot',
+      'path': 'scatter/scatterplot/index.html',
+      'image': 'scatter/scatterplot/thumbnail.png'
+    }, {
+      'name': '尼尔森气泡',
+      'description': '尼尔森气泡',
+      'path': '尼尔森气泡/index.html',
+      'image': '尼尔森气泡/thumbnail.png'
+    }, {
+      'name': '尼尔森气泡（x轴绝对值、比例双模式）',
+      'description': '尼尔森气泡（x轴绝对值、比例双模式）',
+      'path': '尼尔森气泡（x轴绝对值、比例双模式）/index.html',
+      'image': '尼尔森气泡（x轴绝对值、比例双模式）/thumbnail.png'
+    }],
+  'Pie': [{
+      'name': 'pieChart',
+      'description': 'Pie Chart',
+      'path': 'pie/pieChart/index.html',
+      'image': 'pie/pieChart/thumbnail.png'
+    }, {
+      'name': 'donutChart',
+      'description': 'Donut Chart',
+      'path': 'pie/donutChart/index.html',
+      'image': 'pie/donutChart/thumbnail.png'
+    }, {
+      'name': 'animatedDonutChartWithLabels',
+      'description': 'Animated Donut Chart with Labels',
+      'path': 'pie/animatedDonutChartWithLabels/index.html',
+      'image': 'pie/animatedDonutChartWithLabels/thumbnail.png'
+    }, {
+      'name': 'track',
+      'description': 'track',
+      'path': '轨道图单一图例（绝对值、比例两种模式）/index.html',
+      'image': '轨道图单一图例（绝对值、比例两种模式）/thumbnail.png'
+    }],
+  'map': [{
+      'name': 'worldMap',
+      'description': 'worldMap(Stretched Projection)',
+      'path': 'map/worldMap/index.html',
+      'image': 'map/worldMap/thumbnail.png'
+    }]
+};
+</script>
+</head>
+<body>
+  <div class="head-title">基础图表</div>
+  <div id="main">
+  </div>
+  <script>
+  for(var type in config) {
+    var typeDiv = $('<div class="type">');
+    typeDiv.append($('<h2>' + type + '</h2>'));
+    var list = $('<div class="list"></div>');
+    var html = '';
+    config[type].forEach(function (d) {
+      html += '<div class="example">\
+        <h3>' + d.description + '</h3>\
+        <div class="image"><a href="' + relativePath +  d.path + '"><img src="' + relativePath + d.image + '"></img></a></div>\
+        </div>';
+    });
+    list.html(html);
+    list.appendTo(typeDiv);
+    $('<div style="clear: both;"></div>').appendTo(typeDiv);
+    typeDiv.appendTo($('#main'));
+  }
+  </script>
+</body>
+</html>
