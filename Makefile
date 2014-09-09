@@ -1,7 +1,11 @@
-TESTS = $(shell ls -S `find test/unit -type f -name "*.js" -print`)
-MOCHA = ./node_modules/.bin/mocha
+-TESTS = $(shell ls -S `find test/unit -type f -name "*.js" -print`)
+-MOCHA = ./node_modules/.bin/mocha
+-mkdir = mkdir test
+
 install:
 	@npm install .
+	@$(mkdir)
+	@echo 1234
 
 release:
 	echo Release datav

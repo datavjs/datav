@@ -54,6 +54,8 @@ npm install datav
 基于node的完成测试，mocha + expect.js + jQuery + jsdom + jscoverage
 同时也支持浏览器端跑test case
 
+图表测试包含
+
 ## License
 
 comming soon

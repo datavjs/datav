@@ -13,18 +13,8 @@
     "safari": "*",
     "firefox": "*"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "jscoverage": "0.5.3",
-    "mocha": "*",
-    "expect.js": "*",
-    "supertest": "*"
-  },
-  "cube": {
-    "module": {
-      "jade": true,
-      "ejs": false
-    },
-    "ignore": {}
+  "dependencies": {
+    "@ali/jquery": "2.1.1",
+    "d3": "*"
   }
 }

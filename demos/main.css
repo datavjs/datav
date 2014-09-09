@@ -1,0 +1,39 @@
+body{
+  color: #424242;
+}
+.header {
+  background: #66D9EF;
+  padding:10px;
+}
+.header .title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.header .desc {
+  color: #777;
+}
+.sidebar {
+  width: 180px;
+  float: left;
+  border-right: 1px solid #ddd;
+  min-height: 200px;
+}
+.sidebar .menu {
+  margin: 5px;
+}
+.sidebar .menu h3 {
+  margin-top: 10px;
+  cursor: pointer;
+}
+.sidebar .menu .group {
+  margin-left: 5px;
+}
+.sidebar .menu a {
+  display: block;
+  cursor: pointer;
+}
+
+
+.main {
+  margin-left: 200px;
+}
