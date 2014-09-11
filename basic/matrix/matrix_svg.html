@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Matrix_SVG</title>
+    <script src="../deps/d3.min.js"></script>
+    <script src="../deps/jquery-1.7.1.js"></script>
+    <!-- // <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script> -->
+    <script src="js/git_matrix.js"></script>
+    <script src="js/matrix_svg.js"></script>
+
+    <style type="text/css">
+      #chart_svg {
+        position: relative;
+        width: 100%;
+        height: 130px;
+        overflow-x: auto;
+        border: 1px dashed #ededed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="chart_svg"></div>
+    <script>
+      var startTime = new Date();
+      var data = [
+        ['2014-08-08', 1],
+        ['2014-08-10', 2],
+        ['2014-08-11', 1],
+        ['2014-08-13', 3]
+      ];
+
+      var startDate = new Date("1993-12-01");
+      var endDate = new Date();
+
+      var gridSize = 14;
+      var textList = ["猪一样的生活", "为了尿尿走了几步", "轻微湿身", "大干一场"];
+
+      var click = function (e, data) {
+        console.log(data);
+      };
+
+      var mouseover = function (e, data) {
+        console.log(data);
+      };
+
+      var gitMatrix = new Chart.GitMatrix("chart_svg", {
+        "renderMode": "svgMode",
+        "startDate": startDate,
+        "endDate": endDate,
+        "gridSize": gridSize,
+        "textList": textList,
+        "click": click, 
+        "mouseover": mouseover
+      });
+      gitMatrix.loadData(data);
+      gitMatrix.render(function () {
+        var endTime = new Date();
+        console.log(endTime - startTime);
+      });
+    </script>
+  </body>
+</html>

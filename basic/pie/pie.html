@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pie Chart</title>
+    <script src="../deps/d3.min.js"></script>
+    <script src="../deps/jquery-1.7.1.js"></script>
+    <!-- // <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script> -->
+    <script src="js/pie_basic.js"></script>
+
+    <style type="text/css">
+      #chart {
+        position: relative;
+        width: 500px;
+        height: 400px;
+        overflow-x: auto;
+        border: 1px dashed #ededed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="chart"></div>
+    <script>
+      var startTime = new Date();
+      var data = [
+        {date: "2014-08-08", value: 1},
+        {date: "2014-08-09", value: 2},
+        {date: "2014-08-10", value: 3},
+        {date: "2014-08-11", value: 4},
+        {date: "2014-08-12", value: 5},
+        {date: "2014-08-13", value: 3},
+        {date: "2014-08-14", value: 2},
+        {date: "2014-08-15", value: 5},
+        {date: "2014-08-16", value: 1},
+        {date: "2014-08-17", value: 1}
+      ];
+
+      var valueExtent = d3.extent(data, function(d) { return d.value; });
+
+      var click = function (e, data) {
+        console.log(data);
+      };
+
+      var mouseover = function (e, data) {
+        console.log(data);
+      };
+
+      var pie = new Chart.Pie("chart", {
+        'innerRadius': 100
+      });
+      pie.loadData(data);
+      pie.render(function () {
+        var endTime = new Date();
+        console.log(endTime - startTime);
+      });
+    </script>
+  </body>
+</html>
