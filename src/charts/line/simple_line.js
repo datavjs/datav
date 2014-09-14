@@ -42,9 +42,10 @@ function SimpleLine(config) {
   if (typeof config.container === 'string') {
     config.container = $(config.container)[0];
   }
-  if (config.className) {
-    $(config.container).addClass(config.className);
+  if (!config.color) {
+    config.color = d3.scale.category10();
   }
+  util.defaultConfig(config);
   this.tip = config.tip;
   this.legend = config.legend;
 }
@@ -93,6 +94,7 @@ Event.extend(SimpleLine, {
     if (!data || !data.length) {
       return this.empty(this.config.emptyMessage);
     }
+    this.data = data;
     if (options) {
       cfg = util.merge({}, this.config, options);
     } else {
@@ -103,7 +105,7 @@ Event.extend(SimpleLine, {
     var width = cfg.width;
     var height = cfg.height;
     var margin = cfg.margin;
-    var xTicks = cfg.xAxisPoints;
+    var xTicks = cfg.xTicks;
     var container = this.config.container;
 
     // xAxisPoints
@@ -112,8 +114,6 @@ Event.extend(SimpleLine, {
         return '';
       });
     }
-
-    var getColor = color ? d3.scale.ordinal().range(color) : d3.scale.category10();
 
     var w = width - margin.left - margin.right,
       h = height - margin.top - margin.bottom;
@@ -183,39 +183,38 @@ Event.extend(SimpleLine, {
     svg.append('g')
         .attr('class', 'y axis')
         .attr('transform', 'translate(0,0)')
-        .call(yAxis);
+        .call(yAxis)
+        .style({fill: 'none'});
 
     this.lines = svg.selectAll('.line')
         .data(data)
       .enter().append('path')
         .attr('class', function (d) { return 'line l' + d.index; })
         .attr('d', linePath)
-        .attr('stroke', function (d) { return getColor(d.name); });
+        .attr('stroke', function (d) { return color(d.name); })
+        .style({
+          fill: 'none'
+        })
 
     this.vLine = svg.append('path')
         .attr('class', 'mouse-line')
         .attr('d', 'M0,0V' + h);
 
-    this.drawPoints(svg, function (d) {
-      return x(d.index) + xRangeBand / 2;
-    },
-    function (d) {
-      return y(d.value);
-    });
-    this.points = svg.selectAll('.circle')
-        .data(this._getPoints())
-      .enter().append('circle')
-        .attr('class', function (d, i) { return 'circle ' + d.lineIndex + ' ' + 'circle-column-' + (i % data[0].data.length); })
-        .attr('cx', function (d) { return x(d.index) + xRangeBand / 2; })
-        .attr('cy', function (d) { return y(d.value); })
-        .attr('r', 4)
-        .attr('fill', function (d) { return getColor(d.name); });
-
+    this.drawPoints(
+      svg,
+      function (d) {
+        return x(d.index) + xRangeBand / 2;
+      },
+      function (d) {
+        return y(d.value);
+      }
+    );
   },
   drawPoints: function (svg, getX, getY) {
     var self = this;
+    var color = this.config.color;
     this.points = svg.selectAll('.circle')
-      .data(this._getPoints())
+      .data(this._getPoints(this.data))
       .enter().append('circle')
         .attr('class', function (d, i) {
           return 'circle ' + d.lineIndex + ' ' + 'circle-column-' + d.index;
@@ -223,7 +222,7 @@ Event.extend(SimpleLine, {
         .attr('cx', function (d) { return getX(d); })
         .attr('cy', function (d) { return getY(d); })
         .attr('r', 2)
-        .attr('fill', function (d) { return self.config.getColor(d.name); });
+        .attr('fill', function (d) { return color(d.name); });
   },
   setOption: function (name, value) {
     this.config[name] = value;
@@ -281,3 +280,5 @@ Event.extend(SimpleLine, {
     this.tip.hide();
   }
 });
+
+module.exports = SimpleLine;

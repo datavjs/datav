@@ -37,3 +37,6 @@ body{
 .main {
   margin-left: 200px;
 }
+.main .detail, .main .group {
+  display: none;
+}

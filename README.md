@@ -1,35 +1,59 @@
 DataV.js
 
-## Architecture
+## Get Start
 
-```
-/bin
-/src  |
-      | - core
-      | - util
-      | - ......
-
-/demo |
-/test |
-```
-
-
-
-从数据到图的几个步骤，待补充大图。。。
-
-## Getting Start
+get code and install
 
 ```sh
-npm install -g node-cube
+git clone git@github.com:datavjs/datav.git
 cd datav
 make install
-cube start demo // then visit the webpage list in the cmdline
 ```
 
-cube从demo目录启动，对应每个chart自己的demo，在demo目录下建立case
-引用方法参考 demos/main.js
+start server
+```sh
+bin/start
+```
 
-test/unit 存放chart的测试case
+访问命令行提供的网址，开始开发浏览吧
+
+生成文档:
+
+```
+make doc
+```
+
+运行测试
+```
+make test
+```
+
+
+## Architecture
+
+datav 总体分为两层
+
+  - demos  展示层，负责demo用户
+  - src    源码层，各种类型的报表在这里产出
+
+```
+src下，又分为两层:
+  - /charts
+    图标层，各种多样性的图表，实现在这里面.
+    这层是图表的组装层, 各种形状的图表，源码都在这里
+  - /...
+    基础层，各种组件、小物件、底层库 等等
+    这层用来构建charts层， 抽象更小的部分，让charts层的编写更方便
+```
+
+```
+/src
+  - /core     核心小模块
+  - /format   各种格式化工具
+  - /layout   各种布局工具
+  - /legend   各种图例的实现
+  - /tip      各种tip的实现
+```
 
 ## Coding Style
 

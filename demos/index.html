@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Cube Start Demo</title>
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="res/reset.css" />
+    <link rel="stylesheet" href="res/main.css" />
   </head>
   <body>
     <div class="header">
@@ -11,37 +11,40 @@
       <span class="desc">programable chart</span>
     </div>
     <div class="sidebar">
-      <div class="menu">
-
-      </div>
+      <!-- menu start -->
+      <div class="menu"></div>
+      <!-- menu end -->
     </div>
     <div class="main">
-      <div>
-        <h2>Title</h2>
-        <div>
-          chart content here
+      <div class="group"></div>
+      <div class="detail">
+        <h2 id="preview_title">Title</h2>
+        <div id="preview_chart">
+          chart preview here
+        </div>
+        <div id="preview_code">
+          code preview here
         </div>
       </div>
-      <iframe src=""></iframe>
     </div>
-    <script type="text/javascript" src='jquery-1.7.1.js'></script>
-    <script type="text/javascript" src='cube.min.js'></script>
+    <script type="text/javascript" src='res/d3-3.4.11.js'></script>
+    <script type="text/javascript" src='res/cube.min.js'></script>
     <script type="text/javascript">
       (function () {
         // main config for this page
         var appConfig = {
-          main: 'main.js',
+          main: '/res/main.js',
           base: '',
           debug: true
         };
+        Cube.register('d3', d3);
         Cube.init({
           base: appConfig.base,  // or base can be cdn server: http://tbcdn.cn/edp/
           debug: appConfig.debug,
-          timeout: 20000 // load resource timeout
+          version: 1,
+          timeout: 10000 // load resource timeout
         });
-        Cube.use(appConfig.main, function (App) {
-          console.log(App.run(appConfig));
-        });
+        Cube.use(appConfig.main);
       })();
     </script>
   </body>

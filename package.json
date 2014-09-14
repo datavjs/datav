@@ -21,7 +21,9 @@
     "mocha": "*",
     "expect.js": "*",
     "node-cube": "*",
-    "jsdom": "*"
+    "jsdom": "*",
+    "express": "4.9.0",
+    "docv": "*"
   },
   "optionalDependencies": {}
 }
