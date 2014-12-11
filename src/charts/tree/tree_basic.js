@@ -1,5 +1,5 @@
 /**
- *  Line Basic chart
+ *  Tree Basic chart
  */
 var $ = require('jquery');
 var d3 = require('d3');
@@ -7,7 +7,7 @@ var Event = require('../../core/event');
 var util = require('../../core/util');
 /**
  *
- * Class Line Basic
+ * Class Tree Basic
  * @param {Object} config
  * {
  *   container:   {String|DomNode}
@@ -21,7 +21,7 @@ var util = require('../../core/util');
  * }
  *
  */
-function Line (container, config) {
+function Tree (container, config) {
   if (typeof container === 'string') {
     container = $(container);
   }
@@ -48,7 +48,7 @@ function Line (container, config) {
   this.defaults = defaults;
 }
 
-Event.extend(Line, {
+Event.extend(Tree, {
   bindEvent: function () {
   	;
   },
@@ -68,6 +68,9 @@ Event.extend(Line, {
 
     return svg;
   },
+  _createTree: function () {
+    var tree = d3.layout.tree().size([height, width]);
+  }
   // should add it to datavjs
   _unionArray: function (arrays) {
     if (arrays === []) {
@@ -83,12 +86,6 @@ Event.extend(Line, {
     });
 
     return unionArray;
-  },
-  _getExtent: function (dataList) {
-    var min = d3.min(dataList, function(data) { return d3.min(data, function(item) { return item.value; }); });
-    var max = d3.max(dataList, function(data) { return d3.max(data, function(item) { return item.value; }); });
-
-    return [min, max];
   },
   /**
    * render data
@@ -110,96 +107,9 @@ Event.extend(Line, {
     var margin = conf.margin;
     var width = conf.width - margin.left - margin.right;
     var height = conf.height - margin.top - margin.bottom;
-    var valueExtent = this._getExtent(dataList);
-    var gridNum = conf.gridNum;
-    var getColor = conf.getColor;
-    var min = conf.min;
-    min = min === undefined ? valueExtent[0] : min;
-    var max = conf.max;
-    max = max === undefined ? valueExtent[1] : max;
 
-    var paper = svg.append('g')
-        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+    var tree = d3.layout.tree().size([height, width]);
 
-    var x = d3.scale.ordinal()
-        .rangeBands([0, width], 0.5, 0.2);
-
-    var y = d3.scale.linear()
-        .range([height, 0]);
-
-    var xTickValues = conf.xTickValues;
-    if (xTickValues.length === 0) {
-      var xValueList = [];
-      for (var i = 0; i < dataList.length; i++) {
-        xValueList.push(dataList[i].map(function(d) { return d.date; }));
-      }
-
-      xTickValues = this._unionArray(xValueList);
-    }
-
-    x.domain(xTickValues);
-    y.domain([min, max]);
-
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient('bottom');
-
-    var yTickValues = conf.yTickValues;
-    var yTickNum = conf.yTickNum;
-    if (yTickValues.length === 0) {
-      var yStep = (max - min) / (yTickNum - 1);
-      for (var i = 0; i < yTickNum; i++) {
-        yTickValues.push(min + yStep * i);
-      }
-    }
-
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .tickValues(yTickValues)
-        .tickFormat(d3.format(conf.yValueFormat))
-        .orient('left');
-
-    var xAxisNode = paper.append('g')
-        .attr({
-          'class': 'x axis',
-          'transform': 'translate(0,' + height + ')'
-        })
-        .call(xAxis);
-
-    xAxisNode.selectAll('.axis path, .axis line').style(conf.xAxisStyle);
-
-    var yAxisNode = paper.append('g')
-        .attr({ 'class': 'y axis' })
-        .call(yAxis);
-
-    yAxisNode.selectAll('.axis path, .axis line').style(conf.yAxisStyle);
-
-    var line = d3.svg.line()
-        .x(function(d) { return x(d.date) + x.rangeBand() / 2; })
-        .y(function(d) { return y(d.value); });
-
-    var lineGroup = paper.selectAll(".line_group")
-      .data(dataList)
-    .enter().append("g")
-      .attr("class", "line_group");
-
-    lineGroup.append('path')
-      .attr({
-        'class': 'line',
-        'd': function (d) { return line(d); },
-        'stroke': function (d, i) { return getColor(i); }
-      })
-      .style(conf.lineStyle);
-
-    this.svg = svg;
-    this.paper = paper;
-    this.x = x;
-    this.y = y;
-    this.xAxis = xAxis;
-    this.yAxis = yAxis;
-    this.xAxisNode = xAxisNode;
-    this.yAxisNode = yAxisNode;
-    this.lineGroup = lineGroup;
 
     callback = callback || function () {};
     callback();

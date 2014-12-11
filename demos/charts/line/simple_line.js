@@ -2,8 +2,7 @@ var SimpleLine = require('datav/charts/line/simple_line');
 var $ = require('jquery');
 
 var line = new SimpleLine({
-  container: $('#preview_chart')[0],
-
+  container: $('#preview_chart')[0]
 });
 
 var data = [
